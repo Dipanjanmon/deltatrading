@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    /* Deep, rich, dark background for Glassmorphism to pop */
+    background:
+        radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.15), transparent 25%),
+        #020617;
+    /* Slate-950 base */
+    color: #f3f4f6;
+    /* Gray-100 */
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+}
+
+@layer components {
+
+    /* The Core Glass Utility */
+    .glass {
+        @apply bg-slate-900/40 backdrop-blur-xl border border-white/10 shadow-xl;
+    }
+
+    /* Interactive Glass Element (Buttons, inputs) */
+    .glass-interactive {
+        @apply bg-slate-800/50 backdrop-blur-md border border-white/5 hover:bg-slate-700/50 hover:border-white/20 transition-all duration-300;
+    }
+
+    /* Stronger Glass for distinct cards */
+    .glass-card {
+        @apply bg-slate-900/60 backdrop-blur-2xl border border-white/5 shadow-2xl rounded-3xl;
+    }
+
+    /* High contrast glass for important panels */
+    .glass-panel {
+        @apply bg-[#0F172A]/80 backdrop-blur-xl border border-white/10 shadow-2xl;
+    }
+}
