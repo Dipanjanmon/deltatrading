@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/wallet")
-@CrossOrigin(origins = "*")
+
 public class WalletController {
 
     private final WalletService walletService;
