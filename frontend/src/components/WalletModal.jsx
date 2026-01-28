@@ -120,13 +120,13 @@ export default function WalletModal({ isOpen, onClose, onSuccess, user }) {
                         <div className="flex glass-panel rounded-lg p-1.5">
                             <button
                                 onClick={() => setMode('DEPOSIT')}
-                                className={`flex-1 py-2 rounded-md text-sm font-bold transition-all ${mode === 'DEPOSIT' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20' : 'text-slate-400 hover:text-white'}`}
+                                className={`flex - 1 py - 2 rounded - md text - sm font - bold transition - all ${mode === 'DEPOSIT' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20' : 'text-slate-400 hover:text-white'} `}
                             >
                                 Deposit
                             </button>
                             <button
                                 onClick={() => setMode('WITHDRAW')}
-                                className={`flex-1 py-2 rounded-md text-sm font-bold transition-all ${mode === 'WITHDRAW' ? 'bg-amber-600 text-white shadow-lg shadow-amber-900/20' : 'text-slate-400 hover:text-white'}`}
+                                className={`flex - 1 py - 2 rounded - md text - sm font - bold transition - all ${mode === 'WITHDRAW' ? 'bg-amber-600 text-white shadow-lg shadow-amber-900/20' : 'text-slate-400 hover:text-white'} `}
                             >
                                 Withdraw
                             </button>
@@ -160,7 +160,7 @@ export default function WalletModal({ isOpen, onClose, onSuccess, user }) {
                                 </div>
                                 <div className="flex justify-between items-center text-sm">
                                     <span className="text-slate-400">{mode === 'DEPOSIT' ? 'Projected Balance' : 'Remaining Balance'}</span>
-                                    <span className={`font-mono font-bold ${mode === 'DEPOSIT' ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                    <span className={`font - mono font - bold ${mode === 'DEPOSIT' ? 'text-emerald-400' : 'text-amber-400'} `}>
                                         ${amount ? (mode === 'DEPOSIT'
                                             ? (parseFloat(user?.balance || 0) + parseFloat(amount))
                                             : (parseFloat(user?.balance || 0) - parseFloat(amount))
@@ -171,7 +171,7 @@ export default function WalletModal({ isOpen, onClose, onSuccess, user }) {
 
                             <button
                                 type="submit"
-                                className={`w-full py-4 rounded-xl font-bold text-white text-sm tracking-wide transition-all active:scale-95 shadow-lg ${mode === 'DEPOSIT' ? 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-900/20' : 'bg-amber-600 hover:bg-amber-500 shadow-amber-900/20'}`}
+                                className={`w - full py - 4 rounded - xl font - bold text - white text - sm tracking - wide transition - all active: scale - 95 shadow - lg ${mode === 'DEPOSIT' ? 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-900/20' : 'bg-amber-600 hover:bg-amber-500 shadow-amber-900/20'} `}
                             >
                                 Continue
                             </button>
