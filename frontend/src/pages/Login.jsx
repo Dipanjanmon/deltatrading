@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { TrendingUp, Lock, ArrowRight, User, Eye, EyeOff } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import toast from 'react-hot-toast';
+import API_BASE_URL from '../config';
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -162,7 +163,7 @@ export default function Login() {
                     </div>
 
                     <a
-                        href="http://localhost:8081/oauth2/authorization/google"
+                        href={`${API_BASE_URL}/oauth2/authorization/google`}
                         className="w-full flex items-center justify-center gap-3 bg-white text-slate-900 font-bold rounded-xl px-4 py-3 hover:bg-slate-200 transition-all"
                     >
                         <svg className="w-5 h-5" viewBox="0 0 24 24">

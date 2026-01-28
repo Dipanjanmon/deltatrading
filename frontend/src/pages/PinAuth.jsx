@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import { useAuth } from '../context/AuthContext';
 import { Lock, ShieldCheck, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -25,7 +26,7 @@ export default function PinAuth() {
 
         const checkPinStatus = async () => {
             try {
-                const res = await axios.get(`http://localhost:8081/api/pin/status/${user.username}`);
+                const res = await axios.get(`${API_BASE_URL}/api/pin/status/${user.username}`);
                 setMode(res.data.hasPin ? 'verify' : 'set');
             } catch (error) {
                 console.error("Error checking PIN status", error);
@@ -70,7 +71,7 @@ export default function PinAuth() {
 
         try {
             if (mode === 'set') {
-                await axios.post('http://localhost:8081/api/pin/set', {
+                await axios.post(`${API_BASE_URL}/api/pin/set`, {
                     username: user.username,
                     pin: pinValue
                 });
@@ -78,7 +79,7 @@ export default function PinAuth() {
                 contextVerifyPin();
                 navigate('/dashboard');
             } else {
-                await axios.post('http://localhost:8081/api/pin/verify', {
+                await axios.post(`${API_BASE_URL}/api/pin/verify`, {
                     username: user.username,
                     pin: pinValue
                 });
