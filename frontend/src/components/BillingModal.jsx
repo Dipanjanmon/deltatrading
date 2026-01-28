@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { X, CreditCard, ArrowUpRight, ArrowDownLeft, Clock } from 'lucide-react';
+import API_BASE_URL from '../config';
 
 export default function BillingModal({ isOpen, onClose, user }) {
     const [transactions, setTransactions] = useState([]);
@@ -11,7 +12,7 @@ export default function BillingModal({ isOpen, onClose, user }) {
             setLoading(true);
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get(`http://localhost:8081/api/wallet/${user.username}/transactions`, {
+                const res = await axios.get(`${API_BASE_URL}/api/wallet/${user.username}/transactions`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setTransactions(res.data);

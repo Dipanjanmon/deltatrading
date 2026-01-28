@@ -4,6 +4,7 @@ import { X, CreditCard, ArrowDownCircle, ArrowUpCircle, CheckCircle, Loader2, Sh
 import toast from 'react-hot-toast';
 import PropTypes from 'prop-types';
 import MoneySound from '../assets/MoneySoundEffect.mp3';
+import API_BASE_URL from '../config';
 
 export default function WalletModal({ isOpen, onClose, onSuccess, user }) {
     const [amount, setAmount] = useState('');
@@ -48,7 +49,7 @@ export default function WalletModal({ isOpen, onClose, onSuccess, user }) {
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             const endpoint = mode === 'DEPOSIT' ? 'deposit' : 'withdraw';
-            const url = `http://localhost:8081/api/wallet/${endpoint}`;
+            const url = `${API_BASE_URL}/api/wallet/${endpoint}`;
 
             await axios.post(url, { amount: parseFloat(amount) }, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 import { useAuth } from '../context/AuthContext';
 import { LogOut, TrendingUp, Wallet, DollarSign, PieChart as PieIcon, Activity, User, Search, Bell, Settings, ChevronDown, Edit, CreditCard } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
@@ -55,7 +56,7 @@ export default function Dashboard() {
             const token = localStorage.getItem('token');
             if (!token) return;
             try {
-                const response = await axios.get('http://localhost:8081/api/notifications', {
+                const response = await axios.get(`${API_BASE_URL}/api/notifications`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setNotifications(response.data);
@@ -73,7 +74,7 @@ export default function Dashboard() {
     const markAsRead = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.put(`http://localhost:8081/api/notifications/${id}/read`, {}, {
+            await axios.put(`${API_BASE_URL}/api/notifications/${id}/read`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             // Optimistic update
@@ -92,11 +93,11 @@ export default function Dashboard() {
 
     const fetchMarketPrices = useCallback(async () => {
         try {
-            const res = await axios.get('http://localhost:8081/api/trade/prices');
+            const res = await axios.get(`${API_BASE_URL}/api/trade/prices`);
             setMarketPrices(res.data);
 
             // Also fetch stats
-            const statsRes = await axios.get('http://localhost:8081/api/trade/stats');
+            const statsRes = await axios.get(`${API_BASE_URL}/api/trade/stats`);
             setMarketStats(statsRes.data);
         } catch (error) {
             console.error("Error fetching market prices", error);
@@ -108,7 +109,7 @@ export default function Dashboard() {
     // Fetch static/less frequent data (Achievements)
     const fetchAchievements = useCallback(async () => {
         try {
-            const achRes = await axios.get('http://localhost:8081/api/achievements', {
+            const achRes = await axios.get(`${API_BASE_URL}/api/achievements`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
             setAchievements(achRes.data);
@@ -121,11 +122,11 @@ export default function Dashboard() {
     const fetchUserData = useCallback(async () => {
         if (!user?.username) return;
         try {
-            const userRes = await axios.get(`http://localhost:8081/api/users/${user?.username}`);
+            const userRes = await axios.get(`${API_BASE_URL}/api/users/${user?.username}`);
             setBalance(userRes.data.balance);
             setUserProfile(userRes.data); // Store full profile
 
-            const pfRes = await axios.get('http://localhost:8081/api/trade/portfolio');
+            const pfRes = await axios.get(`${API_BASE_URL}/api/trade/portfolio`);
             setPortfolio(pfRes.data);
         } catch (error) {
             console.error("Failed to update user data", error);
@@ -157,7 +158,7 @@ export default function Dashboard() {
     const handleTrade = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://localhost:8081/api/trade/${tradeType.toLowerCase()}`, {
+            await axios.post(`${API_BASE_URL}/api/trade/${tradeType.toLowerCase()}`, {
                 symbol: symbol.toUpperCase(),
                 quantity: parseFloat(quantity),
                 targetPrice: targetPrice ? parseFloat(targetPrice) : null,

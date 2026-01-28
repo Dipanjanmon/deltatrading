@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { History, ArrowRightLeft, TrendingUp, TrendingDown } from 'lucide-react';
+import API_BASE_URL from '../config';
 
 export default function HistorySection() {
     const [activeTab, setActiveTab] = useState('ORDERS');
@@ -17,8 +18,8 @@ export default function HistorySection() {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
 
                 const [ordersRes, txRes] = await Promise.all([
-                    axios.get('http://localhost:8081/api/trade/orders', config),
-                    axios.get('http://localhost:8081/api/wallet/transactions', config)
+                    axios.get(`${API_BASE_URL}/api/trade/orders`, config),
+                    axios.get(`${API_BASE_URL}/api/wallet/transactions`, config)
                 ]);
 
                 setOrders(ordersRes.data);

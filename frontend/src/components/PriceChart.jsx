@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { RefreshCw, Clock } from 'lucide-react';
 import PropTypes from 'prop-types';
+import API_BASE_URL from '../config';
 
 const TIMEFRAMES = [
     { label: '1M', value: '1M' },
@@ -30,7 +31,7 @@ export default function PriceChart({ symbol, stats }) {
             // Only show loading spinner on initial timeframe switch, not polling
             // setLoading(true); 
             try {
-                const res = await axios.get(`http://localhost:8081/api/trade/history/${symbol}?timeframe=${timeframe}`);
+                const res = await axios.get(`${API_BASE_URL}/api/trade/history/${symbol}?timeframe=${timeframe}`);
                 const formattedData = res.data.map(d => ({
                     time: new Date(d.timestamp),
                     price: d.price,

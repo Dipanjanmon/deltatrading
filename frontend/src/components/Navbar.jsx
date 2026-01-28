@@ -3,6 +3,7 @@ import { LogIn, LayoutDashboard, Menu, X, ChevronRight, TrendingUp, Wallet, Awar
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import API_BASE_URL from '../config';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -39,7 +40,7 @@ export default function Navbar() {
                 const payload = JSON.parse(atob(token.split('.')[1]));
                 const username = payload.sub;
 
-                const res = await fetch(`http://localhost:8081/api/users/${username}`, {
+                const res = await fetch(`${API_BASE_URL}/api/users/${username}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (res.ok) {

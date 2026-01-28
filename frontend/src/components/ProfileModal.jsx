@@ -3,6 +3,7 @@ import axios from 'axios';
 import { X, User, Mail, Phone, FileText, Camera } from 'lucide-react';
 import toast from 'react-hot-toast';
 import PropTypes from 'prop-types';
+import API_BASE_URL from '../config';
 
 export default function ProfileModal({ isOpen, onClose, user, onUpdate }) {
     const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ export default function ProfileModal({ isOpen, onClose, user, onUpdate }) {
             // Assuming we use axios interceptor or passing token manually.
             // Dashboard passes 'user', but we need token for upload if protected.
             // Let's assume axios is configured or we pass headers.
-            await axios.post(`http://localhost:8081/api/users/${user?.username}/photo`, uploadData, {
+            await axios.post(`${API_BASE_URL}/api/users/${user?.username}/photo`, uploadData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -65,7 +66,7 @@ export default function ProfileModal({ isOpen, onClose, user, onUpdate }) {
         try {
             const token = localStorage.getItem('token');
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.put(`http://localhost:8081/api/users/${user?.username}`, formData, config);
+            await axios.put(`${API_BASE_URL}/api/users/${user?.username}`, formData, config);
             toast.success('Profile updated successfully!');
             onUpdate();
             onClose();
